@@ -4,11 +4,11 @@
   "description": "Information & Booking flight services",
   "main": "index.js",
   "scripts": {
+	"start": "forever start app.js",
+    "stop": "forever stop app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "start": "forever start app.js",
-    "stop": "forever stop app.js",
+  "repository": {    
     "type": "git",
     "url": "git+https://github.com/39781/EFlight.git"
   },
