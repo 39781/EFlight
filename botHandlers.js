@@ -18,7 +18,7 @@ botHandlers.processRequest = function(req, res){
 		.catch(function(err){
 			reject(err);			
 		});				
-	}
+	});
 }
 
 function generateResponse(requestSource, action){
