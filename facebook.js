@@ -1,31 +1,42 @@
-var flightConfig 	= 	require('./flightConfig');
+var flightConfig 	= 	require('./config');
 
 var responses = {};
 
 responses.generateResponse = function(action){
-	
-var responseType = flightConfig.intentActionResponseTypes[action];
-var faceResponseTemplate = flightConfig.facebookResponseTemplate[responseType];
-if(action == "greeting"){
-	responseContent = Object.keys(flightConfig.flightServices),
-}else{
-	var actionSplitArr = action.split('_');	
-	var length = actionSplitArr.length;
-	if(length == 1){
-		responseContent = flightConfig.flightServices[actionSplitArr[0]].cities;
-	}else if(length == 2){
-		responseContent = Object.keys(flightConfig.flightServices[actionSplitArr[0]].cities[actionSplitArr[1]]);
-	}else{
-		switch(actionSplitArr[length-1]){
-			"Timings":break;
-			"Timeinfo":break;			
-		}	
-	}
-	
-}
+	return new Promise(function(resolve, reject){
+		console.log('generate Response started');
+			
+		var responseContent=[],text='';		
+		if(action == "greeting"){
+			responseContent = Object.keys(flightConfig.flightServices),
+			text = "Please choose Services"
+		}else{
+			var actionSplitArr = action.split('_');	
+			var length = actionSplitArr.length;
+			if(length == 1){
+				responseContent = flightConfig.flightServices[actionSplitArr[0]].cities;
+			}else if(length == 2){
+				responseContent = Object.keys(flightConfig.flightServices[actionSplitArr[0]].cities[actionSplitArr[1]]);
+			}else{
+				switch(actionSplitArr[length-1]){
+					case "Timings":return true;break;
+					case "Timeinfo":return true;break;			
+				}	
+			}
+			
+		}		
+		generateResponseTemplate(responseContent, flightConfig.intentActionResponseTypes[action]['facebook'])
+		.then((resp)=>{ 			
+			//console.log(responseContent, responseViewModel);			
+			return resp.templateGenerateFunc(resp.responseContent,resp.viewModel);
+		})
+		.then((resp)=>{
+			resolve(resp); 
+		})					
+		.catch((err)=>{ reject(err) });
 
 		
-var responseContent ={
+/*var responseContent ={
 	"greeting":Object.keys(flightConfig.flightServices),
 	"indianAirlines":flightConfig.flightServices["indianAirlies"].cities,
 	"indianAirlines_Chennai": Object.keys(flightConfig.flightServices["indianAirlies"].cities["Chennai"]),
@@ -33,7 +44,34 @@ var responseContent ={
 	"indianAirlines_Chennai_Timings":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
 	"indianAirlines_Chennai_Timings_Timeinfo":
 	"indianAirlines_Chennai_Destinaions":
+}*/
+	});
 }
 
+var generateResponseTemplate = function(responseContent, responseViewModel){	
+	return new Promise(function(resolve, reject){		
+		switch(responseViewModel.toLowerCase()){
+			case "quickreply": resolve({"templateGenerateFunc":generateQuickReplyResponse,"responseContent":responseContent,"viewModel":responseViewModel});break;
+			case "card": resolve({"templateGenerateFunc":generateCardResponse,"responseContent":responseContent,"viewModel":responseViewModel});break;
+		}
+	});
 }
 
+var generateQuickReplyResponse = function(responseContent, responseViewModel){
+	return new Promise(function(resolve, reject){
+		console.log('generating quick reply Started');
+		let responseTemplate = JSON.parse(JSON.stringify(flightConfig.facebookResponseTemplate[responseViewModel]));
+		responseTemplate.facebook.text = 'Choose ';
+		responseContent.forEach(function(resp){		
+			responseTemplate.facebook.quick_replies.push({			
+				"content_type":"text",
+				"title": resp,
+				"payload": resp
+			});
+			
+		})		
+		resolve(responseTemplate);
+	});
+}
+
+module.exports = responses;

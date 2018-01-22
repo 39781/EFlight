@@ -46,15 +46,16 @@ var flightConfig = {
 			"imgUrl":"https://www.airlineratings.com/wp-content/uploads/uploads/air-india.jpg",
 			"cities":["Chennai","Hyderabad","Delhi"]
 		}
-	}
+	},
 	"intentActionResponseTypes":{
 		"greeting":{"facebook":"quickReply"},
 		"indianAirlines":{"facebook":"card"},
 		"indianAirlines_Chennai":{"facebook":"quickReply"},
 		"indianAirlines_Hyderabad":{"facebook":"quickReply"},
 		"indianAirlines_Chennai_Timings":{"facebook":"quickReply"},
-		"indianAirlines_Chennai_Timings_Timeinfo":{"facebook":"card"}
+		"indianAirlines_Chennai_Timings_Timeinfo":{"facebook":"card"},
 		"indianAirlines_Chennai_Destinaions":{"facebook":"quickReply"}
 	}
 };
+
 module.exports = flightConfig;
