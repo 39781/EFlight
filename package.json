@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
+	"start": "forever start app.js",
+    "stop":  "forever stop app.js"
     "type": "git",
     "url": "git+https://github.com/39781/EFlight.git"
   },
@@ -22,6 +24,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "express-session": "^1.15.6"
+    "express-session": "^1.15.6",
+    "forever": "^0.15.3"
   }
 }
