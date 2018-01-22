@@ -1,0 +1,30 @@
+{
+  "name": "eflight",
+  "version": "1.0.0",
+  "description": "Information & Booking flight services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+	"start": "forever start app.js",
+    "stop":  "forever stop app.js"
+    "type": "git",
+    "url": "git+https://github.com/39781/EFlight.git"
+  },
+  "keywords": [
+    "Eflight"
+  ],
+  "author": "Hari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/39781/EFlight/issues"
+  },
+  "homepage": "https://github.com/39781/EFlight#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "forever": "^0.15.3"
+  }
+}
