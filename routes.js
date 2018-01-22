@@ -3,7 +3,7 @@ var router			= express.Router();
 var botHandler		= require('./botHandlers');	
 
 router.get('/',function(req, res){
-		
+		console.log('req received');
 	res.send("req received");
 	res.end();
 })
