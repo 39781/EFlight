@@ -20,17 +20,14 @@ responses.generateResponse = function(action,requestText){
 			console.log(actionSplitArr);
 			var length = actionSplitArr.length;			
 			responseContent.title = actionSplitArr[0];
-			responseContent.imgUrl = flightConfig.flightServices[actionSplitArr[0]].imgUrl;
-			console.log(length);
+			responseContent.imgUrl = flightConfig.flightServices[actionSplitArr[0]].imgUrl;			
 			if(length == 1){			
 				responseContent.data = flightConfig.flightServices[actionSplitArr[0]].cities;
 			}else if(length == 2){				
 				responseContent.data = require('./'+actionSplitArr[1].toLowerCase());
 				responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]);				
-			}else{
-				console.log(actionSplitArr[length-1]);
-				responseContent.data = require('./'+actionSplitArr[1].toLowerCase());
-				console.log(actionSplitArr[length-1]);
+			}else{				
+				responseContent.data = require('./'+actionSplitArr[1].toLowerCase());				
 				switch(actionSplitArr[length-1]){
 					case "Timings"		:	responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]["Timings"]);
 											break;
