@@ -60,10 +60,13 @@ var generateResponseTemplate = function(responseContent, responseViewModel){
 var generateQuickReplyResponse = function(responseContent, responseViewModel){
 	return new Promise(function(resolve, reject){
 		console.log('generating quick reply Started');
-		let responseTemplate = JSON.parse(JSON.stringify(flightConfig.facebookResponseTemplate[responseViewModel]));
-		responseTemplate.facebook.text = 'Choose ';
+		
+		let responseTemplate = {};
+		responseTemplate.displayText = "";
+		responseTemplate.data = JSON.parse(JSON.stringify(flightConfig.facebookResponseTemplate[responseViewModel]));
+		responseTemplate.data.facebook.text = 'Choose ';
 		responseContent.forEach(function(resp){		
-			responseTemplate.facebook.quick_replies.push({			
+			responseTemplate.data.facebook.quick_replies.push({			
 				"content_type":"text",
 				"title": resp,
 				"payload": resp
