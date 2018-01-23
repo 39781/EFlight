@@ -101,7 +101,7 @@ var generateCardResponse = function(responseContent, responseViewModel){
 				}
 			}
 		};
-		if(responseContent.data.length>2){
+		if(responseContent.data.length<=2){
 			responseTemplate.data.facebook.attachment.payload.elements[0]={			
 								'title': responseContent.title,
 								'subtitle': responseContent.subtitle,
