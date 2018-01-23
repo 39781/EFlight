@@ -70,13 +70,14 @@ var generateQuickReplyResponse = function(responseContent, responseViewModel){
 				"quick_replies": []
 			}
 		};		
-		responseContent.data.forEach(function(resp){		
-			responseTemplate.data.facebook.quick_replies.push({			
-				"content_type":"text",
-				"title": resp,
-				"payload": resp
-			});
-			
+		responseContent.data.forEach(function(resp){
+			if(resp !='imgUrl'){
+				responseTemplate.data.facebook.quick_replies.push({			
+					"content_type":"text",
+					"title": resp,
+					"payload": resp
+				});
+			}
 		})		
 		resolve(responseTemplate);
 	});
