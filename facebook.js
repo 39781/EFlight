@@ -11,6 +11,9 @@ responses.generateResponse = function(action,requestText){
 			imgUrl:"",
 			data:""	
 		};		
+		if(flightConfig.intentActionResponseTypes[action]=== undefined){
+			action = "greeting";
+		}
 		if(action == "greeting"){
 			responseContent.title = "Welcome"			
 			responseContent.imgUrl = flightConfig.flightServices.imgUrl;
