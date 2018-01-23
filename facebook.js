@@ -7,19 +7,19 @@ responses.generateResponse = function(action,requestText){
 		console.log('generate Response started');
 		var responseContent={
 			title :"",
-			subtitle:"Choose Option",
+			subtitle:flightConfig.intentActionResponseTypes[action].text,
 			imgUrl:"",
 			data:""	
 		};		
 		if(action == "greeting"){
-			responseContent.title = 'Welcome';
+			responseContent.title = "Welcome"			
 			responseContent.imgUrl = flightConfig.flightServices.imgUrl;
 			responseContent.data = Object.keys(flightConfig.flightServices);			
 		}else{
 			var actionSplitArr = action.split('_');	
 			console.log(actionSplitArr);
 			var length = actionSplitArr.length;			
-			responseContent.title = actionSplitArr[0];
+			responseContent.title = actionSplitArr[0];			
 			responseContent.imgUrl = flightConfig.flightServices[actionSplitArr[0]].imgUrl;			
 			if(length == 1){			
 				responseContent.data = flightConfig.flightServices[actionSplitArr[0]].cities;
@@ -70,7 +70,7 @@ var generateQuickReplyResponse = function(responseContent, responseViewModel){
 		responseTemplate.displayText = "";
 		responseTemplate.data = {
 			'facebook': {
-				"text": "Choose flight services/Options",
+				"text": responseContent.subtitle,
 				"quick_replies": []
 			}
 		};		
