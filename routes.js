@@ -13,9 +13,9 @@ router.post('/botHandler',function(req, res){
 	if (req.body.result||req.body.queryResult) {
 		botHandler.processRequest(req, res)
 		.then(function(responseJson){
-			console.log(responseJson);	
+			console.log(responseJson	);	
 			res.status(200);
-			res.json(responseJson).end();
+			res.send(responseJson).end();
 		})
 		.catch(function(err){
 			res.status(400);
