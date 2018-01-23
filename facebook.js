@@ -9,7 +9,7 @@ responses.generateResponse = function(action,requestText){
 			title :"",
 			subtitle:"Choose Option",
 			imgUrl:"",
-			Data:""	
+			data:""	
 		};		
 		if(action == "greeting"){
 			responseContent.title = 'Welcome';
@@ -87,7 +87,7 @@ var generateQuickReplyResponse = function(responseContent, responseViewModel){
 
 var generateCardResponse = function(responseContent, responseViewModel){	
 	return new Promise(function(resolve, reject){
-		console.log('generating quick reply Started');
+		console.log('generating card reply Started');
 		let responseTemplate = {};
 		responseTemplate.displayText = "";
 		responseTemplate.speech = "";
