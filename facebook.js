@@ -27,7 +27,7 @@ responses.generateResponse = function(action,requestText){
 				responseContent.data = require('./'+actionSplitArr[1]);
 				responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]);				
 			}else{
-				responseContent.data = require('./'+actionSplitArr[1]);
+				responseContent.data = require('./'+actionSplitArr[1].toLowerCase());
 				switch(actionSplitArr[length-1]){
 					case "Timings"		:	responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]["Timings"]);
 											break;
