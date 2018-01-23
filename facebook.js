@@ -17,6 +17,7 @@ responses.generateResponse = function(action,requestText){
 			responseContent.data = Object.keys(flightConfig.flightServices);			
 		}else{
 			var actionSplitArr = action.split('_');	
+			console.log(actionSplitArr);
 			var length = actionSplitArr.length;
 			responseContent.title = actionSplitArr[0];
 			responseContent.imgUrl = flightConfig.flightServices[actionSplitArr[0]].imgUrl;
@@ -38,6 +39,7 @@ responses.generateResponse = function(action,requestText){
 			}
 			
 		}		
+		console.log(responseContent);
 		generateResponseTemplate(responseContent, flightConfig.intentActionResponseTypes[action]['facebook'])
 		.then((resp)=>{ 			
 			//console.log(responseContent, responseViewModel);			
