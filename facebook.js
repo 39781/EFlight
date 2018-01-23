@@ -131,6 +131,7 @@ var generateCardResponse = function(responseContent, responseViewModel){
 				})	
 			})			
 		}
+		console.log(responseTemplate);
 		resolve(responseTemplate);					
 	});
 }
