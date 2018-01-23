@@ -11,7 +11,7 @@ router.post('/botHandler',function(req, res){
 	//console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
 	//console.log('Dialogflow Request body: ' + JSON.stringify(req.body));	
 	if (req.body.result||req.body.queryResult) {
-		botHandler.processRequest(req, res)
+		return botHandler.processRequest(req, res)
 		.then(function(responseJson){
 			console.log(responseJson	);	
 			res.status(200);
