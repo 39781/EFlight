@@ -11,13 +11,13 @@ var flightConfig = {
 		}
 	},
 	"intentActionResponseTypes":{
-		"greeting":{"facebook":"quickReply","Text":"Choose Services"},
-		"indianAirlines":{"facebook":"quickReply","Text":"Choose city"},
-		"indianAirlines_Chennai":{"facebook":"card","Text":"Choose option"},
-		"indianAirlines_Hyderabad":{"facebook":"quickReply", "Text":"Choose option"},
-		"indianAirlines_Chennai_Timings":{"facebook":"quickReply" , "Text":"Choose day"},
-		"indianAirlines_Chennai_Timings_Timeinfo":{"facebook":"card", "Text":"Click on Time to Book"},
-		"indianAirlines_Chennai_Destinations":{"facebook":"quickReply", "Text":"Choose option"}
+		"greeting":{"facebook":"quickReply","text":"Choose Services"},
+		"indianAirlines":{"facebook":"quickReply","text":"Choose city"},
+		"indianAirlines_Chennai":{"facebook":"card","text":"Choose option"},
+		"indianAirlines_Hyderabad":{"facebook":"quickReply", "text":"Choose option"},
+		"indianAirlines_Chennai_Timings":{"facebook":"quickReply" , "text":"Choose day"},
+		"indianAirlines_Chennai_Timings_Timeinfo":{"facebook":"card", "text":"Click on Time to Book"},
+		"indianAirlines_Chennai_Destinations":{"facebook":"quickReply", "text":"Choose option"}
 	}
 };
 
