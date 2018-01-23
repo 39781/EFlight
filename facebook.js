@@ -65,6 +65,7 @@ var generateQuickReplyResponse = function(responseContent, responseViewModel){
 		responseTemplate.displayText = "";
 		responseTemplate.data = JSON.parse(JSON.stringify(flightConfig.facebookResponseTemplate[responseViewModel]));
 		responseTemplate.data.facebook.text = 'Choose ';
+		responseTemplate.data.facebook.quick_replies.pop();
 		responseContent.forEach(function(resp){		
 			responseTemplate.data.facebook.quick_replies.push({			
 				"content_type":"text",
