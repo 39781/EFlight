@@ -87,6 +87,7 @@ var generateQuickReplyResponse = function(responseContent, responseViewModel){
 
 var generateCardResponse = function(responseContent, responseViewModel){	
 	return new Promise(function(resolve, reject){
+		console.log('generating quick reply Started');
 		let responseTemplate = {};
 		responseTemplate.displayText = "";
 		responseTemplate.speech = "";
