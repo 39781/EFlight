@@ -24,7 +24,7 @@ responses.generateResponse = function(action,requestText){
 			if(length == 1){			
 				responseContent.data = flightConfig.flightServices[actionSplitArr[0]].cities;
 			}else if(length == 2){				
-				responseContent.data = require('./'+actionSplitArr[1]);
+				responseContent.data = require('./'+actionSplitArr[1].toLowerCase());
 				responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]);				
 			}else{
 				responseContent.data = require('./'+actionSplitArr[1].toLowerCase());
