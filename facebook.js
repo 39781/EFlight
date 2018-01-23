@@ -2,25 +2,38 @@ var flightConfig 	= 	require('./config');
 
 var responses = {};
 
-responses.generateResponse = function(action){
+responses.generateResponse = function(action,requestText){
 	return new Promise(function(resolve, reject){
 		console.log('generate Response started');
-			
-		var responseContent=[],text='';		
+		var responseContent={
+			title :"",
+			subtitle:"Choose Option",
+			imgUrl:"",
+			Data:""	
+		},		
 		if(action == "greeting"){
-			responseContent = Object.keys(flightConfig.flightServices),
-			text = "Please choose Services"
+			responseContent.title = 'Welcome';
+			responseContent.imgUrl = flightConfig.flightServices.imgUrl;
+			responseContent.data = Object.keys(flightConfig.flightServices),			
 		}else{
 			var actionSplitArr = action.split('_');	
 			var length = actionSplitArr.length;
-			if(length == 1){
-				responseContent = flightConfig.flightServices[actionSplitArr[0]].cities;
-			}else if(length == 2){
-				responseContent = Object.keys(flightConfig.flightServices[actionSplitArr[0]].cities[actionSplitArr[1]]);
+			responseContent.title = actionSplitArr[0];
+			responseContent.imgUrl = flightConfig.flightServices[actionSplitArr[0]].imgUrl;
+			if(length == 1){			
+				responseContent.data = flightConfig.flightServices[actionSplitArr[0]].cities;
+			}else if(length == 2){				
+				responseContent.data = require('./'+actionSplitArr[1]);
+				responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]);				
 			}else{
+				responseContent.data = require('./'+actionSplitArr[1]);
 				switch(actionSplitArr[length-1]){
-					case "Timings":return true;break;
-					case "Timeinfo":return true;break;			
+					case "Timings"		:	responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]["Timings"]);
+											break;
+					case "Destinations"	:	responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]["Destinations"]);
+											break
+					case "Timeinfo"		:	responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]["Timings"][requestText]);
+											break;			
 				}	
 			}
 			
@@ -33,18 +46,7 @@ responses.generateResponse = function(action){
 		.then((resp)=>{
 			resolve(resp); 
 		})					
-		.catch((err)=>{ reject(err) });
-
-		
-/*var responseContent ={
-	"greeting":Object.keys(flightConfig.flightServices),
-	"indianAirlines":flightConfig.flightServices["indianAirlies"].cities,
-	"indianAirlines_Chennai": Object.keys(flightConfig.flightServices["indianAirlies"].cities["Chennai"]),
-	"indianAirlines_Hyderabad":Object.keys(flightConfig.flightServices["indianAirlies"].cities["Hyderabad"]),
-	"indianAirlines_Chennai_Timings":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-	"indianAirlines_Chennai_Timings_Timeinfo":
-	"indianAirlines_Chennai_Destinaions":
-}*/
+		.catch((err)=>{ reject(err) });		
 	});
 }
 
@@ -59,14 +61,16 @@ var generateResponseTemplate = function(responseContent, responseViewModel){
 
 var generateQuickReplyResponse = function(responseContent, responseViewModel){
 	return new Promise(function(resolve, reject){
-		console.log('generating quick reply Started');
-		
+		console.log('generating quick reply Started');				
 		let responseTemplate = {};
 		responseTemplate.displayText = "";
-		responseTemplate.data = JSON.parse(JSON.stringify(flightConfig.facebookResponseTemplate[responseViewModel]));
-		responseTemplate.data.facebook.text = 'Choose ';
-		responseTemplate.data.facebook.quick_replies.pop();
-		responseContent.forEach(function(resp){		
+		responseTemplate.data = {
+			'facebook': {
+				"text": "Choose flight services",
+				"quick_replies": []
+			}
+		};		
+		responseContent.data.forEach(function(resp){		
 			responseTemplate.data.facebook.quick_replies.push({			
 				"content_type":"text",
 				"title": resp,
@@ -78,4 +82,53 @@ var generateQuickReplyResponse = function(responseContent, responseViewModel){
 	});
 }
 
+var generateCardResponse = function(){responseContent, responseViewModel){	
+	return new Promise(function(resolve, reject){
+		let responseTemplate = {};
+		responseTemplate.displayText = "";
+		responseTemplate.speech = "";
+		responseTemplate.data = {
+			'facebook': {				
+				"attachment":{
+					"type":"template",
+					"payload":{
+						"template_type":"generic",
+						"elements":[]
+					}
+				}
+			}
+		};
+		if(responseContent.data.length>2){
+			responseTemplate.data.facebook.attachment.payload.elements[0]={			
+								'title': responseContent.title,
+								'subtitle': responseContent.subtitle,
+								'image_url': responseContent.imgUrl,
+								'buttons': []							
+			};
+			responseContent.data.forEach(function(resp){
+				responseTemplate.data.facebook.attachment.payload.elements[0].buttons.push({
+					"type":"postback",
+					"title":resp,
+					"payload":resp
+				});
+			});
+		}else{
+			responseContent.data.forEach(function(resp){		
+				responseTemplate.data.facebook.attachment.payload.elements.push({					
+					'title': responseContent.title,
+					'subtitle': responseContent.subtitle,
+					'image_url': responseContent.imgUrl,
+					'buttons': [
+						{
+							"type":"postback",
+							"title":resp,
+							"payload":resp
+						}									
+					]
+				}	
+			})			
+		}
+		resolve(responseTemplate);					
+	});
+}
 module.exports = responses;

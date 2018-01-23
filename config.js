@@ -1,43 +1,6 @@
-var flightConfig = {
-	 "facebookResponseTemplate" : {
-	  'quickReply':{
-			'facebook': {
-				"text": "",
-				"quick_replies": [
-					{
-						"content_type":"",
-						"title": "",
-						"payload": ""
-					},					
-				]
-			}
-		},
-		'card':{	
-			'facebook': {				
-				"attachment":{
-					"type":"template",
-					"payload":{
-						"template_type":"generic",
-						"elements":[
-							{
-								'title': '',
-								'subtitle': '',
-								'image_url': '',
-								'buttons': [
-									{
-										"type":"postback",
-										"title":"",
-										"payload":""
-									}									
-								]
-							}
-						]
-					}
-				}
-			}
-		}					
-	},
+var flightConfig = {	 
 	"flightServices":{
+		"imgUrl":"https://www.airlineratings.com/wp-content/uploads/uploads/air-india.jpg";
 		"indianAirlines":{
 			"imgUrl":"https://www.airlineratings.com/wp-content/uploads/uploads/air-india.jpg",
 			"cities":["Chennai","Hyderabad","Delhi"]			
@@ -49,8 +12,8 @@ var flightConfig = {
 	},
 	"intentActionResponseTypes":{
 		"greeting":{"facebook":"quickReply"},
-		"indianAirlines":{"facebook":"card"},
-		"indianAirlines_Chennai":{"facebook":"quickReply"},
+		"indianAirlines":{"facebook":"quickReply"},
+		"indianAirlines_Chennai":{"facebook":"card"},
 		"indianAirlines_Hyderabad":{"facebook":"quickReply"},
 		"indianAirlines_Chennai_Timings":{"facebook":"quickReply"},
 		"indianAirlines_Chennai_Timings_Timeinfo":{"facebook":"card"},
