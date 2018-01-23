@@ -19,7 +19,7 @@ botHandlers.processRequest = function(req, res){
 		console.log(action, requestText);
 		botResponses.generateResponse(action, requestText)
 		.then(function(responseJson){
-			responseJson.contextOut = inputContexts;			
+			//responseJson.contextOut = inputContexts;			
 			console.log(responseJson);
 			resolve(responseJson);
 		})
