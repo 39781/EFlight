@@ -18,16 +18,19 @@ responses.generateResponse = function(action,requestText){
 		}else{
 			var actionSplitArr = action.split('_');	
 			console.log(actionSplitArr);
-			var length = actionSplitArr.length;
+			var length = actionSplitArr.length;			
 			responseContent.title = actionSplitArr[0];
 			responseContent.imgUrl = flightConfig.flightServices[actionSplitArr[0]].imgUrl;
+			console.log(length);
 			if(length == 1){			
 				responseContent.data = flightConfig.flightServices[actionSplitArr[0]].cities;
 			}else if(length == 2){				
 				responseContent.data = require('./'+actionSplitArr[1].toLowerCase());
 				responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]);				
 			}else{
+				console.log(actionSplitArr[length-1]);
 				responseContent.data = require('./'+actionSplitArr[1].toLowerCase());
+				console.log(actionSplitArr[length-1]);
 				switch(actionSplitArr[length-1]){
 					case "Timings"		:	responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]["Timings"]);
 											break;
@@ -70,7 +73,7 @@ var generateQuickReplyResponse = function(responseContent, responseViewModel){
 		responseTemplate.displayText = "";
 		responseTemplate.data = {
 			'facebook': {
-				"text": "Choose flight services",
+				"text": "Choose flight services/Options",
 				"quick_replies": []
 			}
 		};		
