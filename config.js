@@ -1,6 +1,6 @@
 var flightConfig = {	 
 	"flightServices":{
-		"imgUrl":"https://www.airlineratings.com/wp-content/uploads/uploads/air-india.jpg";
+		"imgUrl":"https://www.airlineratings.com/wp-content/uploads/uploads/air-india.jpg",
 		"indianAirlines":{
 			"imgUrl":"https://www.airlineratings.com/wp-content/uploads/uploads/air-india.jpg",
 			"cities":["Chennai","Hyderabad","Delhi"]			

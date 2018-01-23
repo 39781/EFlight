@@ -10,11 +10,11 @@ responses.generateResponse = function(action,requestText){
 			subtitle:"Choose Option",
 			imgUrl:"",
 			Data:""	
-		},		
+		};		
 		if(action == "greeting"){
 			responseContent.title = 'Welcome';
 			responseContent.imgUrl = flightConfig.flightServices.imgUrl;
-			responseContent.data = Object.keys(flightConfig.flightServices),			
+			responseContent.data = Object.keys(flightConfig.flightServices);			
 		}else{
 			var actionSplitArr = action.split('_');	
 			var length = actionSplitArr.length;
@@ -82,7 +82,7 @@ var generateQuickReplyResponse = function(responseContent, responseViewModel){
 	});
 }
 
-var generateCardResponse = function(){responseContent, responseViewModel){	
+var generateCardResponse = function(responseContent, responseViewModel){	
 	return new Promise(function(resolve, reject){
 		let responseTemplate = {};
 		responseTemplate.displayText = "";
@@ -125,7 +125,7 @@ var generateCardResponse = function(){responseContent, responseViewModel){
 							"payload":resp
 						}									
 					]
-				}	
+				})	
 			})			
 		}
 		resolve(responseTemplate);					
