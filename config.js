@@ -17,7 +17,7 @@ var flightConfig = {
 		"indianAirlines_Hyderabad":{"facebook":"quickReply"},
 		"indianAirlines_Chennai_Timings":{"facebook":"quickReply"},
 		"indianAirlines_Chennai_Timings_Timeinfo":{"facebook":"card"},
-		"indianAirlines_Chennai_Destinaions":{"facebook":"quickReply"}
+		"indianAirlines_Chennai_Destinations":{"facebook":"quickReply"}
 	}
 };
 

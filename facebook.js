@@ -31,15 +31,16 @@ responses.generateResponse = function(action,requestText){
 				switch(actionSplitArr[length-1]){
 					case "Timings"		:	responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]["Timings"]);
 											break;
-					case "Destinations"	:	responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]["Destinations"]);
+					case "Destinations"	:	responseContent.data = responseContent.data[actionSplitArr[0]]["Destinations"];
 											break
-					case "Timeinfo"		:	responseContent.data = Object.keys(responseContent.data[actionSplitArr[0]]["Timings"][requestText]);
+					case "Timeinfo"		:	responseContent.data = responseContent.data[actionSplitArr[0]]["Timings"][requestText];
 											break;			
 				}	
 			}
 			
 		}		
 		console.log(responseContent);
+		console.log(flightConfig.intentActionResponseTypes[action]['facebook']);
 		generateResponseTemplate(responseContent, flightConfig.intentActionResponseTypes[action]['facebook'])
 		.then((resp)=>{ 			
 			//console.log(responseContent, responseViewModel);			
@@ -52,7 +53,8 @@ responses.generateResponse = function(action,requestText){
 	});
 }
 
-var generateResponseTemplate = function(responseContent, responseViewModel){	
+var generateResponseTemplate = function(responseContent, responseViewModel){
+		console.log(responseViewModel);
 	return new Promise(function(resolve, reject){		
 		switch(responseViewModel.toLowerCase()){
 			case "quickreply": resolve({"templateGenerateFunc":generateQuickReplyResponse,"responseContent":responseContent,"viewModel":responseViewModel});break;
